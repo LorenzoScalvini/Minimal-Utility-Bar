@@ -108,38 +108,37 @@ document.addEventListener("DOMContentLoaded", () => {
   // Inizializza il timer pomodoro
   updatePomodoroTimer()
 
-  document.getElementById("pomodoro-toggle").addEventListener("click", () => {
-    if (pomodoroRunning) {
-      pausePomodoro()
+  // Add event listeners with better error handling
+  function setupPomodoroEvents() {
+    const toggleButton = document.getElementById("pomodoro-toggle")
+    const resetButton = document.getElementById("pomodoro-reset")
+    
+    if (toggleButton) {
+      toggleButton.addEventListener("click", () => {
+        console.log("Toggle button clicked")
+        if (pomodoroRunning) {
+          pausePomodoro()
+        } else {
+          startPomodoro()
+        }
+      })
     } else {
-      startPomodoro()
+      console.error("Toggle button not found")
     }
-  })
-
-  document.getElementById("pomodoro-reset").addEventListener("click", resetPomodoro)
-
-  // Monitoraggio sistema (simulato)
-  let systemStatsThrottle = 0
-  function updateSystemStats() {
-    systemStatsThrottle++
-    if (systemStatsThrottle % 50 !== 0) return
-
-    // Simula l'utilizzo della GPU e CPU
-    const gpuUsage = Math.floor(Math.random() * 30) + 5
-    const cpuUsage = Math.floor(Math.random() * 40) + 10
-
-    document.getElementById("gpu-usage").textContent = `GPU: ${gpuUsage.toString().padStart(2, " ")}%`
-    document.getElementById("cpu-usage").textContent = `CPU: ${cpuUsage.toString().padStart(2, " ")}%`
+    
+    if (resetButton) {
+      resetButton.addEventListener("click", resetPomodoro)
+    } else {
+      console.error("Reset button not found")
+    }
   }
 
   // Aggiorna orologio e data ogni secondo
   updateClock()
   updateDate()
-  updateSystemStats()
 
   setInterval(updateClock, 1000)
   setInterval(updateDate, 60000)
-  setInterval(updateSystemStats, 100)
 
   // Gestione eventi mouse per il pass-through
   const topBar = document.getElementById("top-bar")
@@ -153,4 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
   topBar.addEventListener("mouseleave", () => {
     ipcRenderer.send("set-ignore-mouse-events", true, { forward: true })
   })
+  
+  // Setup pomodoro events after a short delay to ensure DOM is fully loaded
+  setTimeout(setupPomodoroEvents, 100)
 })

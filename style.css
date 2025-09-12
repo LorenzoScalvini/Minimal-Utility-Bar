@@ -52,24 +52,6 @@
   justify-content: flex-end;
 }
 
-#system-stats {
-  display: flex;
-  gap: 12px;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-#gpu-usage,
-#cpu-usage {
-  min-width: 65px;
-  text-align: left;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  cursor: default;
-}
-
 #pomodoro-timer {
   display: flex;
   align-items: center;
@@ -79,6 +61,7 @@
   border-radius: 4px;
   user-select: none;
   -webkit-user-select: none;
+  pointer-events: auto; /* Ensure pomodoro timer receives events */
 }
 
 #pomodoro-time {
@@ -107,6 +90,7 @@
   transition: background 0.2s;
   user-select: none;
   -webkit-user-select: none;
+  pointer-events: auto; /* Explicitly enable pointer events for buttons */
 }
 
 #pomodoro-timer button:hover {
@@ -120,7 +104,7 @@ body {
   height: 100vh;
   background-color: transparent;
   overflow: hidden;
-  pointer-events: none;
+  pointer-events: none; /* This disables pointer events for the entire body */
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -128,7 +112,7 @@ body {
 }
 
 #top-bar * {
-  pointer-events: auto;
+  pointer-events: auto; /* This re-enables pointer events for all elements in top-bar */
   user-select: none;
   -webkit-user-select: none;
 }
