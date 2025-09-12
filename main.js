@@ -14,7 +14,7 @@ function createWindow() {
   const primaryDisplay = screen.getPrimaryDisplay()
   const { width, height } = primaryDisplay.workAreaSize
   const windowWidth = width
-  const windowHeight = 32
+  const windowHeight = 160 // Altezza aumentata per mostrare la GIF sotto la barra
 
   const x = 0
   const y = 0

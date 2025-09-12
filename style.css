@@ -14,13 +14,11 @@
   box-sizing: border-box;
   font-family: "Segoe UI", Arial, sans-serif;
   font-size: 13px;
-  /* Ridotto z-index per stare sotto alle app fullscreen */
-  z-index: 1;
+  z-index: 1000;
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   pointer-events: auto;
-  /* Impedisce la selezione del testo */
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -33,18 +31,24 @@
   display: flex;
   align-items: center;
   pointer-events: auto;
-  /* Impedisce la selezione del testo nelle sezioni */
   user-select: none;
   -webkit-user-select: none;
+  flex: 1;
+}
+
+#left-section {
+  justify-content: flex-start;
 }
 
 #center-section {
-  flex-grow: 1;
   justify-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
 }
 
 #right-section {
-  gap: 20px;
   justify-content: flex-end;
 }
 
@@ -57,7 +61,7 @@
 
 #gpu-usage,
 #cpu-usage {
-  min-width: 65px; /* Fixed width to prevent layout shifts */
+  min-width: 65px;
   text-align: left;
   user-select: none;
   -webkit-user-select: none;
@@ -78,9 +82,9 @@
 }
 
 #pomodoro-time {
-  min-width: 45px; /* Fixed width to prevent layout shifts */
+  min-width: 45px;
   text-align: center;
-  font-family: "Consolas", "Monaco", monospace; /* Monospace font for consistent spacing */
+  font-family: "Consolas", "Monaco", monospace;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -101,7 +105,6 @@
   align-items: center;
   justify-content: center;
   transition: background 0.2s;
-  /* Impedisce la selezione del testo nei pulsanti */
   user-select: none;
   -webkit-user-select: none;
 }
@@ -114,27 +117,22 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 32px;
+  height: 100vh;
   background-color: transparent;
   overflow: hidden;
-  /* IMPORTANTE: permette il passaggio degli eventi del mouse */
   pointer-events: none;
-  /* Impedisce la selezione del testo in tutto il body */
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
 }
 
-/* Assicura che tutti gli elementi all'interno della barra siano cliccabili */
 #top-bar * {
   pointer-events: auto;
-  /* Impedisce la selezione del testo in tutti gli elementi */
   user-select: none;
   -webkit-user-select: none;
 }
 
-/* Stili specifici per testo non selezionabile */
 #clock,
 #date {
   user-select: none;
@@ -144,14 +142,12 @@ body {
   cursor: default;
 }
 
-/* Stili per l'orologio e data al centro */
 #center-section {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-/* Stili per l'area utente */
 #user-info {
   display: flex;
   align-items: center;
@@ -168,7 +164,31 @@ body {
   font-weight: 500;
 }
 
-/* Riorganizzazione sezione destra */
 #right-section {
   gap: 15px;
+}
+
+/* Stili per il contenitore della GIF di Aegislash */
+#aegislash-container {
+  position: fixed;
+  top: 32px; /* Appena sotto la barra */
+  left: 20px;
+  pointer-events: none;
+  z-index: 999;
+}
+
+#aegislash-gif {
+  width: 128px;
+  height: 128px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;
+}
+
+/* La data ora è perfettamente centrata */
+#date {
+  text-align: center;
+  pointer-events: auto;
 }

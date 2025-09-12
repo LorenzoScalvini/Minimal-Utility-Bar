@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ampm = hours >= 12 ? "PM" : "AM"
 
     hours = hours % 12
-    hours = hours ? hours : 12 // l'ora '0' dovrebbe essere '12'
+    hours = hours ? hours : 12
     minutes = minutes < 10 ? "0" + minutes : minutes
 
     const timeString = `${hours}:${minutes} ${ampm}`
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Pomodoro Timer
   let pomodoroInterval = null
-  let pomodoroTimeLeft = 25 * 60 // 25 minuti in secondi
+  let pomodoroTimeLeft = 25 * 60
   let pomodoroRunning = false
   let lastUpdateTime = Date.now()
 
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
           document.getElementById("pomodoro-toggle").textContent = "▶"
         }
       }
-    }, 100) // Check every 100ms for better accuracy but less CPU usage
+    }, 100)
   }
 
   function pausePomodoro() {
@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let systemStatsThrottle = 0
   function updateSystemStats() {
     systemStatsThrottle++
-    if (systemStatsThrottle % 50 !== 0) return // Update every 50th call to reduce CPU usage
+    if (systemStatsThrottle % 50 !== 0) return
 
     // Simula l'utilizzo della GPU e CPU
     const gpuUsage = Math.floor(Math.random() * 30) + 5
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setInterval(updateClock, 1000)
   setInterval(updateDate, 60000)
-  setInterval(updateSystemStats, 100) // Higher frequency but throttled internally
+  setInterval(updateSystemStats, 100)
 
   // Gestione eventi mouse per il pass-through
   const topBar = document.getElementById("top-bar")
