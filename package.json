@@ -1,0 +1,56 @@
+{
+  "name": "minimal-utility-bar",
+  "version": "1.0.0",
+  "description": "Una barra di utilità minimalista per desktop con informazioni di sistema e timer pomodoro",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "dev": "electron . --dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LorenzoScalvini/Minimal-Utility-Bar.git"
+  },
+  "keywords": [
+    "electron",
+    "utility",
+    "system",
+    "pomodoro",
+    "desktop",
+    "bar"
+  ],
+  "author": "Lorenzo Scalvini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LorenzoScalvini/Minimal-Utility-Bar/issues"
+  },
+  "homepage": "https://github.com/LorenzoScalvini/Minimal-Utility-Bar#readme",
+  "devDependencies": {
+    "electron": "^38.1.0",
+    "electron-builder": "^24.6.4"
+  },
+  "build": {
+    "appId": "com.lorenzoscalvini.minimal-utility-bar",
+    "productName": "Minimal Utility Bar",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!dist/**/*",
+      "!**/*.md",
+      "!**/.gitignore"
+    ],
+    "win": {
+      "icon": "assets/icons/icon.ico"
+    },
+    "mac": {
+      "icon": "assets/icons/icon.icns"
+    },
+    "linux": {
+      "icon": "assets/icons/icon.png"
+    }
+  }
+}

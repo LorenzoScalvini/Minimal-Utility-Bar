@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>System Info Bar</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Barra superiore con informazioni di sistema -->
+    <div id="top-bar">
+      <div id="left-section">
+        <div id="clock">00:00 AM</div>
+      </div>
+      <div id="center-section">
+        <div id="date">Lunedì 1 Gennaio</div>
+      </div>
+      <div id="right-section">
+        <div id="system-stats">
+          <span id="gpu-usage">GPU: 0%</span>
+          <span id="cpu-usage">CPU: 0%</span>
+        </div>
+        <div id="pomodoro-timer">
+          <span id="pomodoro-time">25:00</span>
+          <button id="pomodoro-toggle">▶</button>
+          <button id="pomodoro-reset">↺</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
