@@ -14,7 +14,7 @@ function createWindow() {
   const primaryDisplay = screen.getPrimaryDisplay()
   const { width, height } = primaryDisplay.workAreaSize
   const windowWidth = width
-  const windowHeight = 160 // Altezza aumentata per mostrare la GIF sotto la barra
+  const windowHeight = 160 
 
   const x = 0
   const y = 0
@@ -42,22 +42,22 @@ function createWindow() {
   mainWindow.setIgnoreMouseEvents(true, { forward: true })
   mainWindow.setAlwaysOnTop(false)
   mainWindow.loadFile(path.join(__dirname, "index.html"))
-  
+
   setupTray()
 }
 
 function setupTray() {
   let icon
   try {
-    const iconPath = path.join(__dirname, 'assets', 'icons', 'tray-icon.png')
+    const iconPath = path.join(__dirname, "assets", "icons", "tray-icon.png")
     icon = nativeImage.createFromPath(iconPath)
     if (icon.isEmpty()) {
-      throw new Error('Icona non trovata')
+      throw new Error("Icona non trovata")
     }
   } catch (error) {
-    console.log('Icona del tray non trovata, uso icona di fallback')
+    console.log("Icona del tray non trovata, uso icona di fallback")
     icon = nativeImage.createFromDataURL(
-      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
     )
   }
 
@@ -69,16 +69,16 @@ function setupTray() {
   })
 
   const contextMenu = Menu.buildFromTemplate([
-    { 
-      label: "Mostra/Nascondi", 
+    {
+      label: "Mostra/Nascondi",
       click: () => {
         mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show()
-      }
+      },
     },
     { type: "separator" },
-    { label: "Esci", click: () => app.quit() }
+    { label: "Esci", click: () => app.quit() },
   ])
-  
+
   tray.setContextMenu(contextMenu)
 }
 

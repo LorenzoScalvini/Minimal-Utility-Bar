@@ -105,31 +105,73 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("pomodoro-time").style.color = "white"
   }
 
+  let shinyCheckInterval = null
+  let isShiny = false
+
+  function checkForShiny() {
+    const random = Math.random()
+    const aegislashGif = document.getElementById("aegislash-gif")
+
+    if (random < 0.05) {
+      // 5% chance
+      if (!isShiny) {
+        console.log("Aegislash diventa shiny!")
+        aegislashGif.src = "assets/icons/aegi-shiny.gif"
+        aegislashGif.classList.add("shiny")
+        isShiny = true
+
+        // Torna normale dopo 30 secondi
+        setTimeout(() => {
+          aegislashGif.src = "assets/icons/aegi.gif"
+          aegislashGif.classList.remove("shiny")
+          isShiny = false
+          console.log("Aegislash torna normale")
+        }, 30000)
+      }
+    }
+  }
+
+  function startShinyCheck() {
+    shinyCheckInterval = setInterval(checkForShiny, 420000) // 7 minutes
+  }
+
   // Inizializza il timer pomodoro
   updatePomodoroTimer()
 
-  // Add event listeners with better error handling
   function setupPomodoroEvents() {
     const toggleButton = document.getElementById("pomodoro-toggle")
     const resetButton = document.getElementById("pomodoro-reset")
-    
+
+    console.log("Setting up pomodoro events...")
+    console.log("Toggle button:", toggleButton)
+    console.log("Reset button:", resetButton)
+
     if (toggleButton) {
-      toggleButton.addEventListener("click", () => {
-        console.log("Toggle button clicked")
-        if (pomodoroRunning) {
-          pausePomodoro()
-        } else {
-          startPomodoro()
-        }
-      })
+      toggleButton.removeEventListener("click", handleToggleClick)
+      toggleButton.addEventListener("click", handleToggleClick)
+      console.log("Toggle button event listener added")
     } else {
       console.error("Toggle button not found")
     }
-    
+
     if (resetButton) {
+      resetButton.removeEventListener("click", resetPomodoro)
       resetButton.addEventListener("click", resetPomodoro)
+      console.log("Reset button event listener added")
     } else {
       console.error("Reset button not found")
+    }
+  }
+
+  function handleToggleClick(event) {
+    event.preventDefault()
+    event.stopPropagation()
+    console.log("Toggle button clicked, pomodoroRunning:", pomodoroRunning)
+
+    if (pomodoroRunning) {
+      pausePomodoro()
+    } else {
+      startPomodoro()
     }
   }
 
@@ -140,19 +182,25 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(updateClock, 1000)
   setInterval(updateDate, 60000)
 
+  startShinyCheck()
+
   // Gestione eventi mouse per il pass-through
   const topBar = document.getElementById("top-bar")
 
   // Quando il mouse entra nella barra, abilita gli eventi
   topBar.addEventListener("mouseenter", () => {
+    console.log("Mouse entered top bar")
     ipcRenderer.send("set-ignore-mouse-events", false)
   })
 
   // Quando il mouse esce dalla barra, disabilita gli eventi
   topBar.addEventListener("mouseleave", () => {
+    console.log("Mouse left top bar")
     ipcRenderer.send("set-ignore-mouse-events", true, { forward: true })
   })
-  
-  // Setup pomodoro events after a short delay to ensure DOM is fully loaded
-  setTimeout(setupPomodoroEvents, 100)
+
+  setupPomodoroEvents()
+  setTimeout(setupPomodoroEvents, 500)
+
+  console.log("DOM Content Loaded, all event listeners should be set up")
 })
