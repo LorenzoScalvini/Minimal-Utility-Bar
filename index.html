@@ -6,32 +6,38 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Barra superiore con informazioni di sistema -->
+    <!-- Top bar with system information -->
     <div id="top-bar">
       <div id="left-section">
-        <div id="user-info">
-          <img id="user-icon" src="assets/icons/main-icon.png" alt="Icona" width="24" height="24">
-          <span id="username"></span>
-          <div id="clock">00:00 AM</div>
+        <div id="spotify-info">
+          <span class="spotify-icon">♪</span>
+          <span>No music playing</span>
         </div>
       </div>
+      
       <div id="center-section">
-        <div id="date">Lunedì 1 Gennaio</div>
+        <div id="datetime-container">
+          <div id="clock">00:00 AM</div>
+          <span class="separator">•</span>
+          <div id="date">Loading...</div>
+        </div>
       </div>
+      
       <div id="right-section">
         <div id="pomodoro-timer">
           <span id="pomodoro-time">25:00</span>
           <button id="pomodoro-toggle">▶</button>
           <button id="pomodoro-reset">↺</button>
+          <button id="pomodoro-skip" style="display: none;">⏭</button>
         </div>
       </div>
     </div>
 
-    <!-- Contenitore per la GIF di Aegislash -->
+    <!-- Aegislash GIF container -->
     <div id="aegislash-container">
       <img id="aegislash-gif" src="assets/icons/aegi.gif" alt="Aegislash">
     </div>
 
-    <script src="index.js"></script>
+    <script src="renderer.js"></script>
   </body>
 </html>

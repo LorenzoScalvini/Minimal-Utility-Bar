@@ -1,17 +1,37 @@
-/* Stili per la barra superiore */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Top bar styles */
 #top-bar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 32px;
+  height: 48px;
   background-color: rgba(30, 30, 30, 0.85);
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 15px;
-  box-sizing: border-box;
   font-family: "Segoe UI", Arial, sans-serif;
   font-size: 13px;
   z-index: 1000;
@@ -21,10 +41,9 @@
   pointer-events: auto;
   user-select: none;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
 }
 
+/* Section layouts */
 #left-section,
 #center-section,
 #right-section {
@@ -33,25 +52,86 @@
   pointer-events: auto;
   user-select: none;
   -webkit-user-select: none;
-  flex: 1;
 }
 
 #left-section {
+  flex: 1;
   justify-content: flex-start;
 }
 
 #center-section {
+  flex: 1;
   justify-content: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  pointer-events: none;
 }
 
 #right-section {
+  flex: 1;
   justify-content: flex-end;
 }
 
+/* Spotify info section */
+#spotify-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, rgba(30, 215, 96, 0.1), rgba(30, 215, 96, 0.05));
+  border: 1px solid rgba(30, 215, 96, 0.2);
+  max-width: 400px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.3s ease;
+}
+
+#spotify-info:hover {
+  background: linear-gradient(135deg, rgba(30, 215, 96, 0.15), rgba(30, 215, 96, 0.08));
+  border-color: rgba(30, 215, 96, 0.3);
+}
+
+.spotify-icon {
+  color: #1ed760;
+  font-size: 16px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* DateTime container - Clock and Date together */
+#datetime-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+#clock {
+  font-weight: 500;
+  color: #ffffff;
+  font-family: "Consolas", "Monaco", monospace;
+}
+
+.separator {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 10px;
+}
+
+#date {
+  color: #ffffff;
+  font-weight: 400;
+}
+
+/* Pomodoro timer */
 #pomodoro-timer {
   display: flex;
   align-items: center;
@@ -59,19 +139,26 @@
   background: rgba(255, 255, 255, 0.1);
   padding: 4px 8px;
   border-radius: 4px;
-  user-select: none;
-  -webkit-user-select: none;
-  pointer-events: auto; 
+  pointer-events: auto;
+  transition: all 0.3s ease;
+}
+
+#pomodoro-mode {
+  font-size: 10px;
+  font-weight: bold;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 2px 4px;
+  border-radius: 2px;
+  min-width: 35px;
+  text-align: center;
 }
 
 #pomodoro-time {
   min-width: 45px;
   text-align: center;
   font-family: "Consolas", "Monaco", monospace;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  color: #ffffff;
   cursor: default;
 }
 
@@ -87,10 +174,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
-  user-select: none;
-  -webkit-user-select: none;
-  pointer-events: auto; 
+  transition: all 0.2s;
+  pointer-events: auto;
   z-index: 1001;
 }
 
@@ -103,62 +188,7 @@
   transform: scale(0.95);
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: transparent;
-  overflow: hidden;
-  pointer-events: none; 
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
-#top-bar * {
-  pointer-events: auto; 
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-#clock,
-#date {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  cursor: default;
-}
-
-#center-section {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-#user-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-right: 10px;
-  padding: 4px 10px;
-  border-radius: 4px;
-}
-
-#user-icon {
-}
-
-#username {
-  font-weight: 500;
-}
-
-#right-section {
-  gap: 15px;
-}
-
-/* Stili per il contenitore della GIF di Aegislash */
+/* Aegislash container */
 #aegislash-container {
   position: fixed;
   top: 32px;
@@ -172,29 +202,39 @@ body {
   height: 128px;
   user-select: none;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   pointer-events: none;
-  transition: opacity 0.3s ease; 
+  transition: opacity 0.3s ease;
 }
 
-/* La data ora è perfettamente centrata */
-#date {
-  text-align: center;
-  pointer-events: auto;
-}
-
-/* Add shiny effect styles */
-#aegislash-gif.shiny {
-  filter: brightness(1.3) saturate(1.5);
-  animation: shinyGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes shinyGlow {
-  0% {
-    filter: brightness(1.3) saturate(1.5) drop-shadow(0 0 5px gold);
+/* Responsive adjustments for smaller screens */
+@media (max-width: 1024px) {
+  #window-title {
+    max-width: 200px;
   }
-  100% {
-    filter: brightness(1.5) saturate(1.8) drop-shadow(0 0 15px gold);
+  
+  #datetime-container {
+    gap: 8px;
+    padding: 3px 10px;
   }
+  
+  #pomodoro-timer {
+    gap: 4px;
+  }
+  
+  #pomodoro-mode {
+    display: none;
+  }
+}
+
+/* Hover effects */
+#top-bar:hover {
+  background-color: rgba(30, 30, 30, 0.95);
+}
+
+#datetime-container:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+#user-info:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
